@@ -1,0 +1,20 @@
+{% extends "admin/change_list.html" %}
+
+{% block object-tools-items %}
+  <li><a href="{{ export_csv_url }}">Export all transactions to CSV</a></li>
+  {{ block.super }}
+{% endblock %}
+
+{% block content_title %}
+  {{ block.super }}
+  <section class="module" aria-label="Daily payment summary">
+    <h2>Daily payment summary — {{ summary_date }}</h2>
+    <ul>
+      <li>Total transactions: {{ daily_summary.total_transactions }}</li>
+      <li>Successful payments: {{ daily_summary.successful_payments }}</li>
+      <li>Failed payments: {{ daily_summary.failed_payments }}</li>
+      <li>Pending payments: {{ daily_summary.pending_payments }}</li>
+      <li>Total payment amount: {{ daily_summary.total_payment_amount }}</li>
+    </ul>
+  </section>
+{% endblock %}

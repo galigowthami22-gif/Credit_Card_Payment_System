@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="dashboard-shell">
+    <div class="dashboard-header">
+        <div class="eyebrow">Your card flow</div>
+        <div class="page-title-wrap">
+            <h1>Welcome back, {{ user.get_full_name|default:user.username }}</h1>
+            <a href="{% url 'add_card' %}" class="primary-action">
+                <span>+</span>
+                <span>Add a card</span>
+            </a>
+        </div>
+        <p>Your cards and account activity, all in one place.</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon card-saved"><span class="mini-icon"></span></div>
+            <div class="stat-copy">
+                <div class="meta-label">Saved cards</div>
+                <div class="meta-number">{{ cards|length }}</div>
+            </div>
+            <div class="stat-arrow">→</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon card-protected"><span class="mini-check">✓</span></div>
+            <div class="stat-copy">
+                <div class="meta-label">Account security</div>
+                <div class="meta-status">Protected</div>
+            </div>
+            <div class="stat-arrow">→</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon card-activity"><span class="mini-arrow">↗</span></div>
+            <div class="stat-copy">
+                <div class="meta-label">Transactions</div>
+                <div class="meta-status">Activity</div>
+            </div>
+            <div class="stat-arrow">→</div>
+        </div>
+    </div>
+
+    <div class="quick-actions">
+        <div class="section-head">
+            <div class="section-title">Quick actions</div>
+            <div class="section-subtitle">Choose where you'd like to go next.</div>
+        </div>
+        <div class="action-grid">
+            <a href="{% url 'card_list' %}" class="action-card">
+                <div class="action-icon card-saved"><span class="mini-icon"></span></div>
+                <div class="action-copy">
+                    <div class="action-title">My cards</div>
+                    <div class="action-text">View and manage your saved cards</div>
+                </div>
+                <div class="action-arrow">→</div>
+            </a>
+            <a href="{% url 'add_card' %}" class="action-card">
+                <div class="action-icon card-add"><span class="mini-plus">＋</span></div>
+                <div class="action-copy">
+                    <div class="action-title">Add a card</div>
+                    <div class="action-text">Save a credit or debit card</div>
+                </div>
+                <div class="action-arrow">→</div>
+            </a>
+            <a href="{% url 'transaction-history-page' %}" class="action-card">
+                <div class="action-icon card-activity"><span class="mini-arrow">↗</span></div>
+                <div class="action-copy">
+                    <div class="action-title">Transactions</div>
+                    <div class="action-text">Review your payment activity</div>
+                </div>
+                <div class="action-arrow">→</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="security-banner">
+        <div class="security-icon-wrap"><span class="security-icon">◌</span></div>
+        <div class="security-copy">
+            <div class="security-title">Your account is protected</div>
+            <div class="security-text">Card numbers are stored in masked form, helping keep your payment details private.</div>
+        </div>
+        <span class="security-button">Secure account</span>
+    </div>
+</div>
+{% endblock %}

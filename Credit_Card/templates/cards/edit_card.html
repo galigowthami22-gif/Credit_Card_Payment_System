@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card-panel">
+    <h2>Edit Card Details</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Cardholder Name</label>
+            <input type="text" name="card_holder_name" value="{{ card.card_holder_name }}" required>
+        </div>
+        <div class="form-group">
+            <label>Card Number (Masked - Secured)</label>
+            <input type="text" value="{{ card.masked_card_number }}" disabled style="opacity: 0.5; cursor: not-allowed;">
+        </div>
+        <div class="form-group">
+            <label>Expiry Date</label>
+            <input type="text" name="expiry_date" value="{{ card.expiry_date }}" required>
+        </div>
+        <div style="display:flex; gap:1rem; margin-top:2rem;">
+            <a href="{% url 'card_list' %}" class="btn btn-secondary" style="flex:1;">Cancel</a>
+            <button type="submit" class="btn" style="flex:2;">Save Changes</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

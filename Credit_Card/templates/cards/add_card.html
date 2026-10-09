@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card-panel">
+    <h2>Secure Add Card</h2>
+    <div class="security-notice">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <div>
+            <strong>End-to-End Encrypted</strong><br>
+            Your full card number, CVV, and PIN will NOT be saved in our database. We only store the last 4 digits for identification purposes.
+        </div>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Cardholder Name</label>
+            <input type="text" name="card_holder_name" required autocomplete="cc-name">
+        </div>
+        <div class="form-group">
+            <label>Card Number</label>
+            <input type="text" name="card_number" placeholder="1234 5678 1234 5678" required autocomplete="cc-number">
+        </div>
+        <div style="display:flex; gap:1.5rem;">
+            <div class="form-group" style="flex:1;">
+                <label>Expiry Date</label>
+                <input type="text" name="expiry_date" placeholder="MM/YY" required autocomplete="cc-exp">
+            </div>
+        </div>
+        <button type="submit" class="btn" style="width:100%; margin-top:1rem;">Add Card Securely</button>
+    </form>
+</div>
+{% endblock %}

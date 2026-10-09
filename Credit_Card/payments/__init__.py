@@ -1,0 +1,1 @@
+"""FastAPI payment processing service."""

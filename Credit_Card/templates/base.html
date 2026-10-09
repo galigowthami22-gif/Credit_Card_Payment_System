@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardFlow</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=light-theme-2">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">CARDFLOW</div>
+        <div class="nav-links">
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}" class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">Dashboard</a>
+                <a href="{% url 'card_list' %}" class="nav-link {% if request.resolver_match.url_name == 'card_list' %}active{% endif %}">My Cards</a>
+                <a href="{% url 'transaction-history-page' %}" class="nav-link">Transactions</a>
+                <a href="{% url 'api-token' %}" class="nav-link">API Token</a>
+                {% if user.is_staff or user.is_superuser %}
+                    <a href="{% url 'admin:index' %}" class="nav-link">Admin Panel</a>
+                {% endif %}
+                {% if user.is_superuser %}
+                    <a href="{% url 'admin:auth_user_add' %}" class="nav-link">Register Admin</a>
+                {% endif %}
+                <form action="{% url 'logout' %}" method="post" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'register' %}" class="btn btn-signup">Sign Up</a>
+            {% endif %}
+        </div>
+    </nav>
+    <main class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="messages">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
